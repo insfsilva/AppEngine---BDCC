@@ -1,0 +1,41 @@
+{% extends 'general-template.html'  %}
+{% block content %}
+
+<body>
+
+<h1>{{ image_id }}</h1>
+
+<table>
+    <tr>
+        <th>Classes</th>
+        <th>Relations</th>
+        <th>Image</th>
+    </tr>
+    <tr>
+        <td>
+            <ul style="list-style-type: none; margin: 0; padding: 0;">
+                {% for class in data_classes.classes %}
+                <li>
+                    <a href="/image_search?description={{ class[0] }}">{{ class[0] }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <ul style="list-style-type: none; margin: 0; padding: 0;">
+                {% for relation in data_relations.relations %}
+                <li>
+                    <a href="/relation_search?relation={{ relation[1] }}&class1={{ relation[0] }}&class2={{ relation[2] }}">{{ relation[0] }} {{ relation[1] }} {{ relation[2] }}</a>
+                </li>
+                {% endfor %}
+            </ul>
+        </td>
+        <td>
+            <a href="https://storage.googleapis.com/bdcc_open_images_dataset/images/{{ image_id }}.jpg">
+                <img width="300" src="https://storage.googleapis.com/bdcc_open_images_dataset/images/{{ image_id }}.jpg"/>
+            </a>
+        </td>
+    </tr>
+</table>
+
+{% endblock %}

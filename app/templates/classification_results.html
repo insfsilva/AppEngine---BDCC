@@ -1,0 +1,48 @@
+{% extends 'general-template.html'  %}
+{% block content %}
+
+<h1>Classification results</h1>
+
+<b>{{ data|length }}</b> images classified.
+
+<table>
+    <tr>
+        <th>Filename</th>
+        <th>Classifications</th>
+        <th>Image</th>
+    </tr>
+    {% for doc_id, doc_data in data.items() %}
+    <tr>
+        <td>
+            <a href="https://storage.googleapis.com/{{ bucket_name }}/{{ doc_data.filename }}">
+                {{ doc_data.filename }}
+            </a>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <th>Class</th>
+                    <th>Confidence</th>
+                </tr>
+                {% for classification in doc_data.classifications %}
+                <tr>
+                    <td>
+                        <a href="/image_search?description={{ classification.label }}">{{ classification.label }}</a>
+                    </td>
+                    <td>
+                        {{ classification.confidence }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+        </td>
+        <td>
+            <a href="https://storage.googleapis.com/{{ bucket_name }}/{{ doc_data.filename }}">
+                <img src="https://storage.googleapis.com/{{ bucket_name }}/{{ doc_data.filename }}" width="300" />
+            </a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+{% endblock %}

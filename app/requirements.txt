@@ -1,0 +1,11 @@
+google-cloud-bigquery
+google-cloud-storage
+google-cloud-vision
+google-cloud-firestore
+Flask
+requests
+pandas
+numpy
+tensorflow==2.16.1
+Pillow==9.1.0
+jinja2
